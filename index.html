@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marjatan Koodikoulu</title>
+    <link rel="stylesheet" href="styles.css">
+    <script defer src="toiminnot.js"></script>
+</head>
+<body>
+    <div class="scene">
+        <img src="images/vaihtoehtotausta1.png" alt="Marjatan Koodikoulu taustakuva" class="background-image">
+
+        <!-- Mobiilivalikko -->
+        <div class="mobile-menu" id="mobileMenu">
+            <button id="menuToggle">📚 Näytä valikko</button>
+            <div class="menu-items" id="menuItems">
+                <button class="menu-link" data-target="title">Marjatan koodikoulu</button>
+                <button class="menu-link" data-target="title">Opettaja Marjatta</button>
+                <button class="menu-link" data-target="board">Liitutaulu</button>
+                <button class="menu-link" data-target="screen1">JS</button>
+                <button class="menu-link" data-target="screen2">Screen 2</button>
+                <button class="menu-link" data-target="screen3">Screen 3</button>
+                <button class="menu-link" data-target="screen4">Screen 4</button>
+                <button class="menu-link" data-target="screen5">Screen 5</button>
+                <button class="menu-link" data-target="screen6">Screen 6</button>
+            </div>
+        </div>
+
+        <!-- Hotspotit -->
+        <div class="hotspot" id="board" data-content="Tässä opetellaan koodauksen aakkosia liitutaululta!">
+            <img src="images/hotspotraja/liitutaulu.png" alt="Liitutaulu">
+        </div>
+
+        <div class="hotspot" id="teacher" style="top: 30%; left: 18%;" data-content="Hei! Olen Marjatta, tämän koodikoulun opettaja...">
+            <img src="images/hotspotraja/omena.png" alt="Opettaja">
+        </div>
+
+        <div class="hotspot" id="dog" style="top: 70%; left: 50%;" data-content="Tämä on koodikoulun maskotti...">
+            <img src="images/hotspotraja/sydan.png" alt="Koodikoira">
+        </div>
+
+        <div class="hotspot" id="home" style="top: 6%; left: 5%;" data-content="Tästä painikkeesta pääsee etusivulle, se on jätetty lisäkehitys mielessä tänne muiden hotspottien joukkoon.">
+            <img src="images/hotspotraja/etusivu.png" alt="Etusivu">
+        </div>
+
+        <!-- Näytöt -->
+        <div class="hotspot" id="screen1" style="top: 62%; left: 16%;" data-content="Tähän suunnittelin jonkin sortin tunnista oikea ohjelmointikoodi-peliä.">
+            <img src="images/hotspotraja/screen1.png" alt="Näyttö 1">
+        </div>
+
+        <div class="hotspot" id="screen2" style="top: 54%; left: 32%;" data-content="CSS:n harjoitukset tapahtuvat täällä.">
+            <img src="images/hotspotraja/screen2.png" alt="Näyttö 2">
+        </div>
+
+        <div class="hotspot" id="screen3" style="top: 54%; left: 46%;" data-content="Tällä ruudulla näet esimerkkisivut.">
+            <img src="images/hotspotraja/screen3.png" alt="Näyttö 3">
+        </div>
+
+        <div class="hotspot" id="screen4" style="top: 54%; left: 59%;" data-content="Tähän voisi laittaa vaikka muistipelin.">
+            <img src="images/hotspotraja/screen4.png" alt="Näyttö 4">
+        </div>
+
+        <div class="hotspot" id="screen5" style="top: 71%; left: 79%;" data-content="Tähän voisi tulla sivun valmistuessa myös jokin ohjelmointiin liityvä pulmapeli.">
+            <img src="images/hotspotraja/screen5.png" alt="Näyttö 5 (Python)">
+        </div>
+
+        <div class="hotspot" id="screen6" style="top: 54%; left: 78%;" data-content="Minkäköhän pelin tähän voisi keksiä?">
+            <img src="images/hotspotraja/screen6.png" alt="Näyttö 6">
+        </div>
+
+        <!-- Otsikko -->
+        <div class="hotspot" id="title" data-content="Tervetuloa Marjatan koodikouluun!
+        Täällä opitaan ohjelmointiin liittyvistä asioista leikkimielisesti ja lempeästi. Klikkaa eri kohtia luokkahuoneessa, ratkaise haasteita ja tutustu koodauksen maailmaan yhdessä opettajan, maskottikoiran ja muiden yllätyksien kanssa.">
+            <img src="images/title.png" alt="Otsikko">
+        </div>
+    </div>
+
+    <!-- Pop-up-ikkuna -->
+    <div id="popup" class="popup">
+        <div class="popup-content">
+            <span class="close">&times;</span>
+            <p id="popup-text"></p>
+        </div>
+    </div>
+</body>
+</html>
