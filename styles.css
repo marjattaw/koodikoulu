@@ -36,7 +36,7 @@ html, body {
     z-index: 0;
 }
 
-/* Yleinen hotspot-asetus (oletuskoko) */
+/* Hotspot-perustyyli */
 .hotspot {
     position: absolute;
     width: 6vw;
@@ -47,14 +47,12 @@ html, body {
     z-index: 1;
 }
 
-/* Hover-efekti hotspotille */
 .hotspot:hover {
     transform: scale(1.2);
     filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.9));
     z-index: 2;
 }
 
-/* Hotspotin sisäinen kuva */
 .hotspot img {
     width: 100%;
     height: 100%;
@@ -63,7 +61,6 @@ html, body {
     transition: opacity 0.3s ease;
 }
 
-/* Hoverilla näkyvä kuva */
 .hotspot .popup-image {
     opacity: 0;
 }
@@ -72,7 +69,6 @@ html, body {
     opacity: 1;
 }
 
-/* Hoverilla korostettava kuvake */
 .highlightable {
     transition: filter 0.3s ease, transform 0.3s ease;
 }
@@ -83,7 +79,6 @@ html, body {
     z-index: 3;
 }
 
-/* Raahattava hotspot */
 .draggable-hotspot {
     cursor: grab;
 }
@@ -92,7 +87,7 @@ html, body {
     cursor: grabbing;
 }
 
-/* Pop-up ikkuna */
+/* Pop-up-ikkuna */
 .popup {
     display: none;
     position: fixed;
@@ -112,14 +107,15 @@ html, body {
     padding: 20px;
     border-radius: 10px;
     text-align: center;
-    max-width: 500px; /* isommaksi! */
-    width: 90vw;       /* skaalaa näytön mukaan */
+    max-width: 500px;
+    width: 90vw;
     max-height: 90vh;
     animation: fadeIn 0.4s ease;
     position: relative;
+    overflow-y: auto;
 }
 
-/* 🎯 Erikoistausta screen2:n popupille */
+/* Erikoistausta esim. screen2 */
 .popup-content.sahara-style {
     background: url('images/taustaetsi.png') no-repeat center/cover;
     color: #222;
@@ -138,13 +134,12 @@ html, body {
     cursor: pointer;
 }
 
-/* Popupin avautumisanimaatio */
 @keyframes fadeIn {
     from { opacity: 0; transform: scale(0.9); }
     to { opacity: 1; transform: scale(1); }
 }
 
-/* 📐 Yksilölliset koot hotspoteille */
+/* Yksilölliset koot hotspoteille */
 #board {
     width: 20vw;
     max-width: 400px;
@@ -179,39 +174,81 @@ html, body {
     left: 30%;
 }
 
-/* 🐍 Piilotetut esineet popup-pelissä */
+/* Muistipeli */
+.memory-game {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+    box-sizing: border-box;
+}
+
+.memory-card {
+    width: 100px;
+    height: 100px;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 0.5s;
+    cursor: pointer;
+}
+
+.memory-card.flip {
+    transform: rotateY(180deg);
+}
+
+.memory-card img {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    object-fit: cover;
+    backface-visibility: hidden;
+    border-radius: 8px;
+}
+
+.front-face {
+    transform: rotateY(180deg);
+}
+
+/* 🐍 Etsi ja löydä -pelin käärmeet */
 .hidden-item {
     position: absolute;
-    width: 30px;
-    height: 30px;
+    width: 40px;
+    height: 40px;
     background: url('images/python.png') no-repeat center/contain;
-    opacity: 0.2;
+    opacity: 0.3;
     cursor: pointer;
-    transition: opacity 0.3s ease;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    z-index: 5;
 }
 
 .hidden-item.found {
     opacity: 1;
+    transform: scale(1.2);
     filter: drop-shadow(0 0 5px gold);
 }
 
-/* 📱 Responsiivisuus pienille näytöille */
-/* 📱 Responsiivisuus pienille näytöille */
+.hidden-item:hover {
+    opacity: 0.6;
+}
+
+/* Responsiivisuus pienille näytöille */
 @media (max-width: 768px) {
     .hotspot {
         width: 10vw;
         max-width: 90px;
-        position: absolute;
     }
 
     #dog {
         width: 14vw;
-        position: absolute;
     }
 
     #title {
         width: 30vw;
-        position: absolute;
     }
 
     .background-image {
@@ -219,35 +256,11 @@ html, body {
         object-fit: cover;
     }
 
-    /* 🧭 Hotspotien uudet sijainnit mobiilissa */
-    #teacher {
-        top: 60%;
-        left: 50%;
-    }
-
-    #dog {
-        top: 70%;
-        left: 50%;
-    }
-
-    #board {
-        position: absolute;
-        top: 45%;
-        left: 5%;
-    }
-
-    #title {
-        top: 5%;
-        left: 10%;
-    }
-
-    /* Piilotetaan kaikki hotspotit, jotka näkyvät valikossa */
-    #screen1, #screen2, #screen3, #screen4, #screen5, #screen6,
-    #teacher, #board, #title {
+    #teacher, #board, #title,
+    #screen1, #screen2, #screen3, #screen4, #screen5, #screen6 {
         display: none;
     }
 
-    /* 📱 Mobiilivalikko */
     .mobile-menu {
         position: fixed;
         bottom: 10px;
@@ -285,22 +298,20 @@ html, body {
         cursor: pointer;
     }
 }
-/* 🧾 Responsiivisuus tableteille (esim. iPad) */
+
+/* Responsiivisuus tableteille */
 @media (max-width: 1024px) {
     .hotspot {
         width: 10vw;
         max-width: 90px;
-        position: absolute;
     }
 
     #dog {
         width: 14vw;
-        position: absolute;
     }
 
     #title {
         width: 30vw;
-        position: absolute;
     }
 
     .background-image {
@@ -308,13 +319,11 @@ html, body {
         object-fit: cover;
     }
 
-    /* Piilotetaan kaikki hotspotit, jotka näkyvät valikossa */
-    #screen1, #screen2, #screen3, #screen4, #screen5, #screen6,
-    #teacher, #board, #title {
+    #teacher, #board, #title,
+    #screen1, #screen2, #screen3, #screen4, #screen5, #screen6 {
         display: none;
     }
 
-    /* Tablettivalikko (käytetään samaa kuin mobiilissa) */
     .mobile-menu {
         position: fixed;
         bottom: 10px;
